@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AUS.ExtendibleHashFileDebugView.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels1="clr-namespace:AUS.GUI.ViewModels"
+        xmlns:views1="clr-namespace:AUS.GUI.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AUS.GUI.Views.ExtendibleHashFileEcvIndexDebugWindow"
+        x:DataType="viewModels1:ExtendibleHashFileEcvIndexDebugWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Extendible Hash File Debug"
+        x:CompileBindings="True">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:ExtendibleHashFileDebugWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid 
+            Grid.Row="0"
+            ColumnDefinitions="Auto,Auto,*,Auto,Auto"
+            RowDefinitions="Auto,Auto,auto"
+            Margin="10 4 0 4">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="FirstFreeBlockAddress" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding EhfDebug.FirstFreeBlockAddress}" TextAlignment="Right" />
+                        
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Depth" Margin="0 0 10 0" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding EhfDebug.DirectoryDepth}" TextAlignment="Right" />
+            
+            <!-- horizontal items -->
+            <ScrollViewer
+                Grid.Row="0"
+                Grid.Column="2"
+                Grid.RowSpan="2"
+                Margin="10 0"
+                MaxWidth="2000"
+                HorizontalScrollBarVisibility="Auto">
+                <ListBox
+                    
+                    ItemsSource="{Binding DirectoryItems}">
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem:nth-child(odd)">
+                            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumBrush}" />
+                        </Style>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="2 0" />
+                        </Style>
+                    </ListBox.Styles>
+            
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid 
+                                RowDefinitions="Auto,Auto,Auto"
+                                ColumnDefinitions="*,*"
+                                MinWidth="60">
+                                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding DebugIndex}" FontSize="12" Margin="0" Foreground="DodgerBlue" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Depth}" FontSize="12" Margin="0" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ValidRecordsCount}" FontSize="12" Margin="0" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding BlockAddress}" FontSize="12" Margin="0" Foreground="Firebrick" HorizontalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </ScrollViewer>
+            
+            <Button Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Content="Refresh" Click="RefreshButton_OnClick" Margin="10 0 10 0" />
+        </Grid>
+        
+        <views1:ExtendibleHashFileEcvIndexBlockListView Grid.Row="1" />
+    </Grid>
+
+</Window>

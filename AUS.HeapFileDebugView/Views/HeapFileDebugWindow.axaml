@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:AUS.HeapFileDebugView.Views"
+        xmlns:viewModels="clr-namespace:AUS.HeapFileDebugView.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AUS.HeapFileDebugView.Views.HeapFileDebugWindow"
+        x:DataType="viewModels:HeapFileDebugWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Heap File Debug"
+        Loaded="Window_OnLoaded"
+        x:CompileBindings="True">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <viewModels:HeapFileDebugWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid 
+            Grid.Row="0"
+            ColumnDefinitions="Auto,Auto,*,Auto,Auto"
+            RowDefinitions="Auto,Auto"
+            Margin="10 4 0 4">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="FirstFreeBlockAddress" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding HfDebug.FirstFreeBlockAddress }" TextAlignment="Right" />
+                        
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="FirstPartiallyFreeBlockAddress" Margin="0 0 10 0" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding HfDebug.FirstPartiallyFreeBlockAddress }" TextAlignment="Right" />
+            
+            <ToggleButton Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Content="Extended View" IsChecked="{Binding ExtendedView}"  />
+            <Button Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Content="Refresh" Click="RefreshButton_OnClick" Margin="10 0 10 0" />
+        </Grid>
+        
+        <views:HeapFileBlockListView Grid.Row="1" IsVisible="{Binding CompactView}" />
+        <views:HeapFileExtendedBlockListView Grid.Row="1" IsVisible="{Binding ExtendedView}" />
+    </Grid>
+
+</Window>

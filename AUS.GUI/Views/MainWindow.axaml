@@ -1,0 +1,134 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AUS.GUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="500"
+        MinWidth="1300"
+        MinHeight="500"
+        x:Class="AUS.GUI.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AUS S2"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        Closing="Window_OnClosing">
+    
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="White"
+                    TintOpacity="1"
+                    MaterialOpacity="0.95" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        
+        <Grid HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch"
+              ColumnDefinitions="*,*"
+              RowDefinitions="Auto,*">
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top"
+                  Margin="0 10 0 0"
+                  ColumnDefinitions="Auto,Auto,Auto,*,Auto,Auto,100,200,100"
+                  RowDefinitions="Auto,Auto">
+                
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <Button Content="+ Pridať zákazníka" Margin="10 0 0 0" Click="CreatePersonButton_OnClick" />
+                    <Button Content="+ Generator" Margin="10 0 0 0" Click="GenerateButton_OnClick" />
+                    <Button Content="EFH Index ID" Margin="10 0 0 0" Click="EHFIndexIDButton_OnClick" />
+                    <Button Content="EFH Index EČV" Margin="10 0 0 0" Click="EHFIndexECVButton_OnClick" />
+                    <Button Content="HF Data" Margin="10 0 0 0" Click="HFDataButton_OnClick" />
+                </StackPanel>
+                
+                <Label Grid.Row="0" Grid.Column="5" Margin="20 0 0 0" VerticalAlignment="Center">Vyhľadať podľa:</Label>
+                <ComboBox Grid.Row="0" Grid.Column="6"
+                          SelectedIndex="0"
+                          MaxDropDownHeight="500"
+                          HorizontalAlignment="Stretch" 
+                          Margin="5 0 5 0"
+                          SelectedValue="{Binding PersonQuery.SearchBy}"
+                          ItemsSource="{Binding SearchByOptions}" />
+                <TextBox Grid.Row="0" Grid.Column="7" Watermark="Kľúč" Margin="5 0 5 0" Text="{Binding PersonQuery.SearchValue}" />
+                
+                <Button Grid.Row="0" Grid.Column="8" Content="Vyhľadať" Margin="5 0 10 0" Click="SearchButton_OnClick" />
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="0" 
+                  ColumnDefinitions="Auto,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto"
+                  IsVisible="{Binding IsSelectedPerson}">
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Informácie o zákazníkovi" FontSize="20" FontWeight="Bold" Margin="10 20 0 10"/>
+            
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 0 0">ID</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Watermark="ID" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding SelectedPerson.Id}" />
+                
+                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 0 0">EČV</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Watermark="EČV" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding SelectedPerson.ECV}" />
+                
+                <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 0 0">Meno</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Watermark="Meno" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding SelectedPerson.FirstName}" />
+                
+                <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 10 0">Priezvisko</Label>
+                <TextBox Grid.Row="4" Grid.Column="1" Watermark="Priezvisko" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding SelectedPerson.LastName}" />
+
+                <Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" Margin="10 15 0 0">Návštevy</Label>
+                <DataGrid Grid.Row="5" Grid.Column="1"
+                          Margin="5 10 5 5" ItemsSource="{Binding SelectedPerson.ServiceVisits}"
+                          SelectionMode="Single"
+                          SelectionChanged="DataGrid_OnSelectionChanged"
+                          Name="ServiceVisitsDataGrid"
+                          IsReadOnly="True"
+                          GridLinesVisibility="All"
+                          BorderThickness="1" BorderBrush="Gray">
+                
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Style>
+                    </DataGrid.Styles>
+                
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Dátum" Width="Auto" Binding="{Binding Date}" />
+                        <DataGridTextColumn Header="Cena" Width="Auto" Binding="{Binding Price}" />
+                        <DataGridTextColumn Header="Celý popis" Width="Auto" Binding="{Binding FullDescription}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch"
+                      ColumnDefinitions="Auto,*,Auto,Auto">
+                    <Button Grid.Column="0" Content="+ Pridať návštevu" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 5 10" Click="CreateServiceVisitButton_OnClick" IsEnabled="{Binding IsEnabledAddServiceVisit}" />
+                    <Button Grid.Column="2" Content="Odstrániť" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 5 10" Click="DeletePersonButton_OnClick" />
+                    <Button Grid.Column="3" Content="Uložiť Zmeny" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 5 10" HorizontalContentAlignment="Center" Click="SavePersonButton_OnClick" />
+                </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="1" 
+                  ColumnDefinitions="Auto,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                  IsVisible="{Binding IsSelectedServiceVisit}">
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Informácie o návšteve" FontSize="20" FontWeight="Bold" Margin="10 20 0 10"/>
+            
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 0 0">Dátum</Label>
+                <CalendarDatePicker Grid.Row="1" Grid.Column="1" Watermark="Dátum" Margin="5 10 10 5" Padding="10,5,10,5" HorizontalAlignment="Stretch" SelectedDate="{Binding SelectedServiceVisit.Date}" />
+                
+                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10 5 0 0">Cena</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Watermark="Cena" Margin="5 10 10 5" HorizontalAlignment="Stretch" Text="{Binding SelectedServiceVisit.Price}" />
+                
+                <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Margin="10 12 0 0">Popis</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Watermark="Popis" Margin="5 10 10 5" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Height="185" Text="{Binding SelectedServiceVisit.FullDescription}" />
+                
+                <Button Grid.Row="4" Grid.Column="1" Content="Odstrániť" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 10 10" Click="DeleteServiceVisitButton_OnClick" />
+            </Grid>
+        </Grid>
+    </Panel>
+    
+</Window>

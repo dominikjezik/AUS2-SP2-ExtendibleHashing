@@ -1,0 +1,58 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AUS.GUI.ViewModels"
+             x:Class="AUS.GUI.Views.ExtendibleHashFileEcvIndexBlockListView"
+             x:DataType="vm:ExtendibleHashFileEcvIndexDebugWindowViewModel">
+    <ListBox
+        ItemsSource="{Binding EhfDebug.Blocks}">
+        <ListBox.Styles>
+            <Style Selector="ListBoxItem:nth-child(odd)">
+                <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumBrush}" />
+            </Style>
+        </ListBox.Styles>
+        
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <TextBlock Text="{Binding BlockAddressLabel}" FontWeight="Bold" FontSize="16" Margin="10 0 0 0" Foreground="Firebrick" />
+
+                    <Grid 
+                        ColumnDefinitions="Auto,Auto"
+                        RowDefinitions="Auto,Auto,Auto"
+                        Margin="10 4 0 4">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="ValidRecordsCount" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ValidRecordsCount}" TextAlignment="Right" />
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="PreviousFreeBlockAddress" Margin="0 0 10 0" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PreviousFreeBlockAddress}" TextAlignment="Right" />
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="NextFreeBlockAddress" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding NextFreeBlockAddress}" TextAlignment="Right" />
+                    </Grid>
+                    
+                    <Separator Background="{DynamicResource SystemControlForegroundBaseLowBrush }" />
+                    <ItemsControl ItemsSource="{Binding StoredRecords }">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1" CornerRadius="5" Margin="10 10 0 0" Width="200">
+                                    <Grid 
+                                        Margin="5"
+                                        RowDefinitions="Auto,Auto,Auto"
+                                        ColumnDefinitions="*,Auto">
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Key.Value}" FontWeight="Bold" />
+                                        <TextBlock Grid.Row="1" Grid.Column="0"  Text="{Binding BlockAddress}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>

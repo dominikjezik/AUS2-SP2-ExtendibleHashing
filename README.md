@@ -151,11 +151,11 @@ Aplikácia je navrhnutá na správu zákazníkov s ich vozidlami a návštevami 
 ## 🔍 Vyhľadávanie a získavanie záznamov
 Proces získavania údajov o zákazníkovi prebieha v týchto krokoch:
 1. 🧭 **Výber metódy vyhľadávania**  
-   Používateľ si vyberie, či chce vyhľadávať podľa **ID zákazníka** alebo **EČV** a zadá príslušnú hodnotu.
+    Používateľ si vyberie, či chce vyhľadávať podľa **ID zákazníka** alebo **EČV** a zadá príslušnú hodnotu.
 2. 📍 **Nájdenie adresy pomocou indexu**
-   Aplikácia používa dva **Rozšíriteľné hashovacie súbory** ako indexové štruktúry na vyhľadanie zadaného kľúča a získanie **adresy** príslušného záznamu v **Heap File**.
+    Aplikácia používa dva **Rozšíriteľné hashovacie súbory** ako indexové štruktúry na vyhľadanie zadaného kľúča a získanie **adresy** príslušného záznamu v **Heap File**.
 3. 📄 **Získanie záznamu z Heap File**
-   Pomocou nájdenej adresy aplikácia pristupuje k **Heap File** a načíta celý **záznam zákazníka**, vrátane osobných údajov, informácií o vozidle a histórie návštev servisu.
+    Pomocou nájdenej adresy aplikácia pristupuje k **Heap File** a načíta celý **záznam zákazníka**, vrátane osobných údajov, informácií o vozidle a histórie návštev servisu.
 
 <br>
 

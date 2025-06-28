@@ -5,8 +5,15 @@ namespace AUS.GUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    /*
     private const int DataBlockSize = 28000;
     private const int IndexBlockSize = 500;
+    */
+    
+    //private const int DataBlockSize = 10000;
+    //private const int IndexBlockSize = 550;
+    private const int DataBlockSize = 24000;
+    private const int IndexBlockSize = 220;
     
     //private const string DBBasePath = "/Users/dominik/Desktop/data";
     private const string DBBasePath = @"C:\Users\dominik\Desktop\data";
@@ -23,7 +30,7 @@ public class MainWindowViewModel : ViewModelBase
 
     public ApplicationService Service => _service;
     
-    public List<string> SearchByOptions { get; set; } = ["ID", "EČV"];
+    public List<string> SearchByOptions { get; set; } = ["ID", "License Plate"];
     
     public PersonQuery PersonQuery { get; set; } = new() { SearchBy = "ID" };
 

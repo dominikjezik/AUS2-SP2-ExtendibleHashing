@@ -12,42 +12,30 @@
         x:Class="AUS.GUI.Views.CreatePersonWindow"
         x:DataType="views:CreatePersonWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AUS S2"
-        TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent">
+        Title="Create Customer">
     
     <Panel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
-                    TintColor="White"
-                    TintOpacity="1"
-                    MaterialOpacity="0.65" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
-        
         <Grid HorizontalAlignment="Stretch" 
               VerticalAlignment="Stretch"
               ColumnDefinitions="100,*"
               Margin="10"
               RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
             
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Pridanie nového zákazníka" FontSize="20" FontWeight="Bold" Margin="0 5 0 5"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Add new customer" FontSize="20" FontWeight="Bold" Margin="0 5 0 5"/>
 
             <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">ID</Label>
             <TextBox Grid.Row="1" Grid.Column="1" Watermark="ID" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.Id}" />
             
-            <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">EČV</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" MaxLength="10" Watermark="EČV" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.ECV}" />
+            <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">License Plate</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" MaxLength="10" Watermark="License Plate" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.ECV}" />
             
-            <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">Meno</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" MaxLength="15" Watermark="Meno" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.FirstName}" />
+            <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">Name</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" MaxLength="15" Watermark="Name" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.FirstName}" />
             
-            <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">Priezvisko</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" MaxLength="20" Watermark="Priezvisko" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.LastName}" />
+            <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0 5 0 0">Surname</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" MaxLength="20" Watermark="Surname" Margin="5 10 5 5" HorizontalAlignment="Stretch" Text="{Binding Person.LastName}" />
             
-            <Button Grid.Row="6" Grid.Column="1" Content="Uložiť" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 5 5" Click="SaveButton_OnClick" />
+            <Button Grid.Row="6" Grid.Column="1" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 10 5 5" Click="SaveButton_OnClick" />
             
         </Grid>
     </Panel>

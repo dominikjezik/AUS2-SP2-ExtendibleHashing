@@ -263,7 +263,7 @@ public class ApplicationService
                 serviceVisits[j] = new ServiceVisit
                 {
                     Date = DateTime.Now,
-                    Description = [ "Popis návštevy" ]
+                    Description = [ "Note_" + _random.Next(1, 1000) ]
                 };
             }
             
@@ -271,8 +271,8 @@ public class ApplicationService
             {
                 Id = _random.Next(1, int.MaxValue),
                 Ecv = GenerateEcv(),
-                FirstName = "Meno",
-                LastName = "Priezvisko",
+                FirstName = "Name_" + _random.Next(1, 1000),
+                LastName = "Surname_" + _random.Next(1, 1000),
                 ServiceVisits = serviceVisits
             };
             

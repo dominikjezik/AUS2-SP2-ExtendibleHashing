@@ -7,7 +7,7 @@
         Width="300" Height="100"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
-        Title="Chyba">
+        Title="Error">
         
         <Grid RowDefinitions="Auto, Auto" Margin="20">
             <TextBlock Grid.Row="0" Name="TextBlockMessage" FontSize="16" />

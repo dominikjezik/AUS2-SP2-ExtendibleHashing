@@ -109,7 +109,7 @@ The application includes a debugging tool that allows users to inspect the curre
 <br>
 <br>
 
-# 🗃️ Rozšíriteľné hashovanie + Heap File dátové štruktúry
+# 🗃️ Rozšíriteľné hashovanie + Heap File údajové štruktúry
 Vlastná implementácia dátových štruktúr **Rozšíriteľného hashovacieho súboru** a **Heap File** určených na ukladanie a správu údajov v súboroch (rovnaký princíp ako databázové systémy). Štruktúry sa používajú v aplikácií **Auto servis** na správu zákazníkov a ich vozidiel, pričom poskytujú rýchly prístup k údajom pomocou indexov rozšíriteľného hashovania. Údaje sú vždy uložené v súboroch, ktoré sa čítajú a zapisujú ako pole bajtov iba pri vykonávaní operácií nad nimi (užitočné pri nedostatku operačnej pamäte). Aplikácia je napísaná v C# pomocou .NET a Avalonia pre GUI.
 
 Aplikácia bola vytvorená ako druhá semestrálna práca v rámci predmetu Algoritmy a údajové štruktúry 2 na Fakulte riadenia a informatiky Žilinskej univerzity v Žiline.
@@ -161,7 +161,7 @@ Proces získavania údajov o zákazníkovi prebieha v týchto krokoch:
 
 ![Postup vyhľadávania](docs/images/search-flow.png)
 <p align=center><em>
-    Postup vyhľadávania ilustrujúci proces vyhľadávania záznamu zákazníka podľa ID alebo EČV cez všetky použité dátové štruktúry.
+    Postup vyhľadávania ilustrujúci proces vyhľadávania záznamu zákazníka podľa ID alebo EČV cez všetky použité údajové štruktúry.
 </em></p>
 
 ## 🕵🏻‍♂️ Ladiace nástroje
